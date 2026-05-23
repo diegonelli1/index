@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+Here's the full code:
+html<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -31,7 +32,6 @@
     padding: 0 16px 60px;
   }
 
-  /* HEADER */
   header {
     width: 100%;
     max-width: 680px;
@@ -47,7 +47,6 @@
   header h1 span { color: var(--accent); }
   header p { color: var(--muted); font-size: .9rem; margin-top: 6px; }
 
-  /* FILTER PILLS */
   .filters {
     display: flex; flex-wrap: wrap; gap: 8px;
     justify-content: center;
@@ -67,7 +66,6 @@
   .pill-btn:hover { border-color: var(--accent); color: var(--accent); }
   .pill-btn.active { background: var(--accent); border-color: var(--accent); color: #0f1117; }
 
-  /* PROGRESS */
   .progress-row {
     width: 100%; max-width: 680px;
     display: flex; align-items: center; gap: 12px;
@@ -83,7 +81,6 @@
   }
   .progress-label { font-size: .82rem; color: var(--muted); white-space: nowrap; }
 
-  /* CARD */
   .card-wrapper {
     width: 100%; max-width: 680px;
     perspective: 1200px;
@@ -144,14 +141,12 @@
     color: var(--muted); font-style: italic;
   }
 
-  /* FLIP HINT */
   .flip-hint {
     text-align: center; color: var(--muted);
     font-size: .8rem; margin-top: 10px;
     opacity: .7;
   }
 
-  /* CONTROLS */
   .controls {
     display: flex; gap: 12px;
     margin-top: 24px;
@@ -171,11 +166,8 @@
   .ctrl-btn.primary { background: var(--accent); color: #0f1117; border-color: var(--accent); }
   .ctrl-btn.primary:hover { opacity: .88; }
   .ctrl-btn:disabled { opacity: .3; cursor: default; }
-
-  /* SHUFFLE toggle */
   .ctrl-btn.on { border-color: var(--accent2); color: var(--accent2); }
 
-  /* SCORE CHIPS */
   .score-row {
     display: flex; gap: 10px;
     margin-top: 20px;
@@ -194,7 +186,6 @@
   .chip-hard { background: rgba(255,140,91,.12); color: var(--accent2); border-color: rgba(255,140,91,.25); }
   .chip-hard:hover { background: rgba(255,140,91,.22); }
 
-  /* DONE STATE */
   .done-screen {
     display: none;
     flex-direction: column; align-items: center;
@@ -211,12 +202,10 @@
   .done-screen h2 span { color: var(--accent); }
   .done-screen p { color: var(--muted); }
 
-  /* TAG badge color */
   .tag-aff  { background: rgba(91,255,160,.1); color: var(--accent); }
   .tag-neg  { background: rgba(255,90,90,.12); color: #ff7070; }
   .tag-int  { background: rgba(255,200,80,.1); color: #ffc850; }
 
-  /* Direction badge */
   .dir-es { color: #a0c4ff; }
   .dir-en { color: #ffd6a5; }
 
@@ -283,13 +272,7 @@
 </div>
 
 <script>
-/* =========================================================
-   DATA — 25 cards (mix of ES→EN and EN→ES)
-   type: aff | neg | int
-   dir: "es→en" | "en→es"
-   ========================================================= */
 const ALL_CARDS = [
-  // AFFIRMATIVE
   { front:"Yo trabajo todos los días.", back:"I work every day.", type:"aff", dir:"es→en", hint:"I + verb base" },
   { front:"She reads a book every night.", back:"Ella lee un libro todas las noches.", type:"aff", dir:"en→es", hint:"he/she/it → verb + s" },
   { front:"Nosotros vivimos en Buenos Aires.", back:"We live in Buenos Aires.", type:"aff", dir:"es→en", hint:"we + verb base" },
@@ -299,8 +282,6 @@ const ALL_CARDS = [
   { front:"Ellas van al gimnasio los martes.", back:"They go to the gym on Tuesdays.", type:"aff", dir:"es→en", hint:"they + verb base" },
   { front:"I drink coffee in the morning.", back:"Yo tomo café a la mañana.", type:"aff", dir:"en→es", hint:"I + verb base" },
   { front:"Mi hermana vive en Córdoba.", back:"My sister lives in Córdoba.", type:"aff", dir:"es→en", hint:"she → lives (verb + s)" },
-
-  // NEGATIVE
   { front:"Yo no como carne.", back:"I don't eat meat.", type:"neg", dir:"es→en", hint:"I/you/we/they + don't + verb base" },
   { front:"She doesn't like spicy food.", back:"A ella no le gusta la comida picante.", type:"neg", dir:"en→es", hint:"doesn't → he/she/it" },
   { front:"Ellos no hablan francés.", back:"They don't speak French.", type:"neg", dir:"es→en", hint:"they + don't + verb base" },
@@ -308,8 +289,6 @@ const ALL_CARDS = [
   { front:"Él no tiene coche.", back:"He doesn't have a car.", type:"neg", dir:"es→en", hint:"he + doesn't + verb base" },
   { front:"I don't understand the question.", back:"Yo no entiendo la pregunta.", type:"neg", dir:"en→es", hint:"I + don't" },
   { front:"Vos no vivís cerca de acá.", back:"You don't live near here.", type:"neg", dir:"es→en", hint:"you + don't + verb base" },
-
-  // INTERROGATIVE
   { front:"¿Trabajás los sábados?", back:"Do you work on Saturdays?", type:"int", dir:"es→en", hint:"Do + you + verb base + ?" },
   { front:"Does she speak English?", back:"¿Ella habla inglés?", type:"int", dir:"en→es", hint:"Does → he/she/it" },
   { front:"¿Dónde viven ustedes?", back:"Where do you live?", type:"int", dir:"es→en", hint:"Where + do + you + verb base + ?" },
@@ -321,9 +300,6 @@ const ALL_CARDS = [
   { front:"¿Con quién trabajás?", back:"Who do you work with?", type:"int", dir:"es→en", hint:"Who + do + you + verb + with?" },
 ];
 
-/* =========================================================
-   STATE
-   ========================================================= */
 let deck = [...ALL_CARDS];
 let filtered = [...deck];
 let index = 0;
@@ -332,9 +308,6 @@ let shuffleOn = false;
 let good = 0, hard = 0;
 let currentFilter = 'all';
 
-/* =========================================================
-   FILTER
-   ========================================================= */
 function setFilter(f, btn) {
   currentFilter = f;
   document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
@@ -354,9 +327,6 @@ function applyFilter() {
   showCard();
 }
 
-/* =========================================================
-   RENDER
-   ========================================================= */
 const typeLabels = { aff:'Affirmative ✔', neg:'Negative ✘', int:'Interrogative ?' };
 const typeClasses = { aff:'tag-aff', neg:'tag-neg', int:'tag-int' };
 
@@ -406,9 +376,6 @@ function updateScore() {
   document.getElementById('hardCount').textContent = hard;
 }
 
-/* =========================================================
-   SHUFFLE
-   ========================================================= */
 function shuffle(arr) {
   for(let i = arr.length-1; i>0; i--) {
     const j = Math.floor(Math.random()*(i+1));
@@ -423,9 +390,6 @@ function toggleShuffle() {
   applyFilter();
 }
 
-/* =========================================================
-   DONE
-   ========================================================= */
 function showDone() {
   document.getElementById('doneScreen').classList.add('visible');
   document.getElementById('cardWrapper').style.display = 'none';
@@ -446,15 +410,8 @@ function restart() {
   showCard();
 }
 
-function reviewHard() {
-  // keep only cards user marked hard (last hard.length cards before done)
-  // Simple approach: re-filter to type int+neg as "likely hard" — or just restart
-  restart();
-}
+function reviewHard() { restart(); }
 
-/* =========================================================
-   KEYBOARD
-   ========================================================= */
 document.addEventListener('keydown', e => {
   if(e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
   if(e.key === 'ArrowRight') next();
@@ -463,9 +420,6 @@ document.addEventListener('keydown', e => {
   if(e.key === '2') markCard('hard');
 });
 
-/* =========================================================
-   INIT
-   ========================================================= */
 showCard();
 </script>
 </body>
